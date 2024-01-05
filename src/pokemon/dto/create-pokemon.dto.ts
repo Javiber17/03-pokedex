@@ -1,1 +1,9 @@
-export class CreatePokemonDto {}
+export class CreatePokemonDto {
+
+    no: number;
+
+    name: string;
+
+
+
+}
