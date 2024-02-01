@@ -7,7 +7,7 @@ export class CreatePokemonDto {
     @IsPositive()
     @Min(1)
     no: number;
-    
+     
     @IsString()
     @MinLength(1)
     name: string;
@@ -15,3 +15,5 @@ export class CreatePokemonDto {
 
 
 }
+
+/*video 76 min 3.15*/

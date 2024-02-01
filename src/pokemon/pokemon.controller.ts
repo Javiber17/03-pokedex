@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus } from '@nestjs/common';
+ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
@@ -8,6 +8,7 @@ export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
   @Post()
+  //HttpCode( HttpStatus.UNAUTHORIZED ) --recordar improtar HttpCode y HttpStatus-- Este codigo permite personalizar los errores, despues de punto se pude poner el que uno prefiera. 
   create(@Body() createPokemonDto: CreatePokemonDto) {
     return this.pokemonService.create(createPokemonDto);
   }
@@ -22,9 +23,9 @@ export class PokemonController {
     return this.pokemonService.findOne(term);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePokemonDto: UpdatePokemonDto) {
-    return this.pokemonService.update(+id, updatePokemonDto);
+  @Patch(':term')
+  update(@Param('term') term: string, @Body() updatePokemonDto: UpdatePokemonDto) {
+    return this.pokemonService.update(term, updatePokemonDto);
   }
 
   @Delete(':id')

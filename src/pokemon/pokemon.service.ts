@@ -7,10 +7,10 @@ import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 
 
-@Injectable()
+  @Injectable()
 export class PokemonService {
 
-  constructor(
+  constructor(  
     @InjectModel( Pokemon.name)
     private readonly pokemonModel: Model<Pokemon>,
   ) {}
@@ -37,6 +37,7 @@ export class PokemonService {
   }
 
   async findOne(term: string) {
+    
     let pokemon: Pokemon;
 
     if (!isNaN(+term)) {
@@ -60,8 +61,16 @@ export class PokemonService {
     return Pokemon;
   }
 
-  update(id: number, updatePokemonDto: UpdatePokemonDto) {
-    return `This action updates a #${id} pokemon`;
+  async  update(term: string, updatePokemonDto: UpdatePokemonDto) {
+
+    const pokemon = await this.findOne (term);
+    if ( updatePokemonDto.name)
+        updatePokemonDto.name = updatePokemonDto.name.toLowerCase(); 
+
+    await pokemon.UpdateOne(updatePokemonDto);
+    
+
+    return pokemon;
   }
 
   remove(id: number) {
